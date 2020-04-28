@@ -110,6 +110,19 @@ update Pilote set Adresse='Nice' where NumPil=9;
 
 delete from Vol where NumVol=12;
 
+/*==============================================================*/
+/* créer trigger pour supprimer pilote                          */
+/*==============================================================*/
+DROP TRIGGER IF EXISTS delete_pilote;
+
+create trigger delete_pilote
+before delete
+on Pilote
+for each row
+	delete from Vol where Vol.NumPil=old.NumPil ;  
+
+
+delete from Pilote where NumPil=9;
 
 /*==============================================================*/
 /* créer user                                                   */
